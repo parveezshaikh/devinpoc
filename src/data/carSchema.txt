@@ -1,0 +1,9 @@
+Car:STRING
+MPG:DOUBLE
+Cylinders:INT
+Displacement:DOUBLE
+Horsepower:DOUBLE
+Weight:DOUBLE
+Acceleration:DOUBLE
+Model:INT
+Origin:STRING
