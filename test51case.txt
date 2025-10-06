@@ -5,3 +5,4 @@ Using the Test1 branch perform the below new requirement
 4)	The new code should verify the row count match between source and target file based on the filter condition
 5)	The new code should verify if all records in output file have Area < 300
 6)	The new code should verify the sum of CurrentAccountBalance match between source and target file based on the filter condition
+7) - create the output file containing the results of this test. please call this file as result51.txt. please create this in new folder name "result" under "src"  
