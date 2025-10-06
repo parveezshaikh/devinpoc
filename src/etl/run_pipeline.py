@@ -17,7 +17,7 @@ from src.etl.SparkDriver import DriverProgram
 
 def main(json_path=None):
     if not json_path:
-        json_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '../config/local_test3.json'))
+        json_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '../config/test51.json'))
 
     json_path = os.path.normpath(json_path)
     print(f"Using JSON config: {json_path}")
