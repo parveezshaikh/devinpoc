@@ -1,0 +1,7 @@
+Using the Test1 branch perform the below new requirement
+1)	Write new python code  to test the pipeline “test51.json” ingestion job
+2)	create the new code in a new folder called “testautomation” under “src”
+3)	The new code should take the source file and output file path and filename as parameter
+4)	The new code should verify the row count match between source and target file based on the filter condition
+5)	The new code should verify if all records in output file have Area < 300
+6)	The new code should verify the sum of CurrentAccountBalance match between source and target file based on the filter condition
