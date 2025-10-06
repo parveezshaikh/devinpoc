@@ -1,0 +1,65 @@
+{
+  "component": [
+    {
+      "id": "Input_CSV1",
+      "component_name": "Input_CSV1",
+      "component_type": "INPUTFILE",
+      "input_data_file_type": "CSV",
+      "input_data_file_path": "../data/factbook.csv",
+      "input_schema_file_path": "",
+      "delimiter": ",",
+      "header": "true",
+      "table_name": "",
+      "database_name": ""
+    },
+    {
+		"id":"Input_CSV2",
+		"component_name":"Input_CSV2",
+		"component_type":"INPUTFILE",
+		"input_data_file_type":"CSV",
+		"input_data_file_path": "../data/cars.csv",
+		"input_schema_file_path": "../data/carSchema.txt",
+		"delimiter": ";",
+		"header": "false",
+		"table_name":"",
+		"database_name":""
+	},
+   {
+		"id":"Join_1",
+		"component_name":"Join_1",
+		"component_type":"Join",
+		"join_type":[
+			"inner"
+		],
+		"join_conditions":[
+			"Input_CSV1.Country = Input_CSV2.Origin"
+		],
+		"node_reference":[
+			"Input_CSV1",
+			"Input_CSV2"
+		]
+	},
+		{
+		"id":"Sort_1",
+		"component_name":"Sort_1",
+		"component_type":"Sort",
+		"sorting_type": "sort",
+		"sorting_column_name": [
+			"Country"
+		],
+		"node_reference": [
+			"Join_1"
+		]
+	},
+    {
+		"id":"Output_1",
+		"component_name":"Output_1",
+		"component_type":"OUTPUTFILE",
+		"output_data_file_type": "CSV",
+		"output_data_file_path": "../outputfile/factbook_local_output",
+		"node_reference": [
+			"Sort_1"
+		]
+	}
+  ]
+}
