@@ -4,7 +4,7 @@ class Component:
     """
     Component class to have the required attribute necessary for file loading
     """
-    def __init__(self,id,component_name, component_type, input_data_file_type=None, input_data_file_path=None, input_schema_file_path=None,delimiter="", header=None,table_name=None,database_name=None,join_type=None,join_conditions=None,node_reference=None,sorting_type = None, sorting_column_name=None,output_data_file_type=None,output_data_file_path=None,filter_criteria=None,input_table_type=None,database_url=None,db_username=None,db_password=None,rollup_type=None,rollup_groupby_keys=None,rollup_aggregation=None,rollup_condition=None,dedup_sort_type=None,dedup_sort_columns=None,scan_type=None,scan_partition_key=None,scan_order_by_column=None,scan_sum_column=None,lookup_type=None,attribute=None,lookup_select_key1=None,lookup_select_key2=None,lookup_join_select_columns=None,lookup_join_columns=None,lookup_select_key=None,merge_type=None,merge_key=None,partition_type=None,partition_key=None):
+    def __init__(self,id,component_name, component_type, input_data_file_type=None, input_data_file_path=None, input_schema_file_path=None,delimiter="", header=None,table_name=None,database_name=None,join_type=None,join_conditions=None,node_reference=None,sorting_type = None, sorting_column_name=None,output_data_file_type=None,output_data_file_path=None,filter_criteria=None,input_table_type=None,database_url=None,db_username=None,db_password=None,rollup_type=None,rollup_groupby_keys=None,rollup_aggregation=None,rollup_condition=None,dedup_sort_type=None,dedup_sort_columns=None,scan_type=None,scan_partition_key=None,scan_order_by_column=None,scan_sum_column=None,lookup_type=None,attribute=None,lookup_select_key1=None,lookup_select_key2=None,lookup_join_select_columns=None,lookup_join_columns=None,lookup_select_key=None,merge_type=None,merge_key=None,partition_type=None,partition_key=None,pivot_index_columns=None,pivot_column=None,pivot_value_column=None,pivot_aggregation=None,pivot_fill_value=None):
         self.id = id
         self.component_name = component_name
         self.component_type = component_type
@@ -47,6 +47,11 @@ class Component:
         self.merge_key = merge_key
         self.partition_type = partition_type
         self.partition_key = partition_key
+        self.pivot_index_columns = pivot_index_columns
+        self.pivot_column = pivot_column
+        self.pivot_value_column = pivot_value_column
+        self.pivot_aggregation = pivot_aggregation
+        self.pivot_fill_value = pivot_fill_value
 
 
 
@@ -54,6 +59,5 @@ class Component:
     def from_json(cls, json_string):
         json_dict = json.loads(json_string)
         return cls(**json_dict)
-
 
 

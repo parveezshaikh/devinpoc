@@ -5,7 +5,7 @@ from src.join.JoinComponent import JoinComponent
 from src.sort.SortComponent import SortComponent
 from src.output.OutputCSVComponent import OutputCSVComponent
 from src.input.InputCSVFileComponent import InputCSVFile
-from src.factory import InputFileComponentFactory,JoinComponentFactory,OutputFileComponentFactory,SortComponentFactory,FilterComponentFactory,InputTableComponentFactory,RollupComponentFactory,DedupSortComponentFactory,ScanComponentFactory,LookupComponentFactory,MergeComponentFactory,PartitionComponentFactory
+from src.factory import InputFileComponentFactory,JoinComponentFactory,OutputFileComponentFactory,SortComponentFactory,FilterComponentFactory,InputTableComponentFactory,RollupComponentFactory,DedupSortComponentFactory,ScanComponentFactory,LookupComponentFactory,MergeComponentFactory,PartitionComponentFactory,PivotComponentFactory
 
 
 def ComponentDriver(ComponentInfo,spark,tasks):
@@ -49,12 +49,14 @@ def ComponentDriver(ComponentInfo,spark,tasks):
                 elif (ComponentInfo.component_type).upper() == 'PARTITION':
                     component = PartitionComponentFactory.PartitionComponentFactory().getPartitionComponent(ComponentInfo, spark)
                     tasks[ComponentInfo.id] = component
+                elif (ComponentInfo.component_type).upper() == 'PIVOT':
+                    component = PivotComponentFactory.PivotComponentFactory().getPivotComponent(ComponentInfo, spark)
+                    tasks[ComponentInfo.id] = component
             #print(tasks)
             return tasks
 
         except Exception as e:
             print(f'failed in updating tasks for  --->{ComponentInfo.id} in Component driver')
             print(e)
-
 
 
