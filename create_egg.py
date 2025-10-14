@@ -3,7 +3,7 @@ import shutil
 from setuptools import setup
 
 
-OUTPUT_DIR = 'output'
+OUTPUT_DIR = 'src/output'
 
 
 if __name__ == "__main__":
