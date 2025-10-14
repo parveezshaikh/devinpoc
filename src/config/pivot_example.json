@@ -1,0 +1,41 @@
+{
+  "component": [
+    {
+      "id": "Input_Pivot",
+      "component_name": "Input_Pivot",
+      "component_type": "INPUTFILE",
+      "input_data_file_type": "CSV",
+      "input_data_file_path": "src/data/pivot_sample.csv",
+      "input_schema_file_path": "",
+      "delimiter": ",",
+      "header": "true",
+      "table_name": "",
+      "database_name": ""
+    },
+    {
+      "id": "Pivot_1",
+      "component_name": "Pivot_1",
+      "component_type": "PIVOT",
+      "node_reference": [
+        "Input_Pivot"
+      ],
+      "pivot_index_columns": [
+        "Region"
+      ],
+      "pivot_column": "Metric",
+      "pivot_value_column": "Value",
+      "pivot_aggregation": "sum",
+      "pivot_fill_value": 0
+    },
+    {
+      "id": "Pivot_Output",
+      "component_name": "Pivot_Output",
+      "component_type": "OUTPUTFILE",
+      "output_data_file_type": "CSV",
+      "output_data_file_path": "src/outputfile/pivot_output",
+      "node_reference": [
+        "Pivot_1"
+      ]
+    }
+  ]
+}
