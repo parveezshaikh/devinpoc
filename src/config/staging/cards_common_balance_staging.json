@@ -1,0 +1,26 @@
+{
+  "component": [
+    {
+      "id": "cards_common_balance_input",
+      "component_name": "cards_common_balance_input",
+      "component_type": "INPUTFILE",
+      "input_data_file_type": "CSV",
+      "input_data_file_path": "../data/cards_com_bal.csv",
+      "input_schema_file_path": "",
+      "delimiter": ",",
+      "header": "true",
+      "table_name": "",
+      "database_name": ""
+    },
+    {
+      "id": "cards_common_balance_staging",
+      "component_name": "cards_common_balance_staging",
+      "component_type": "OUTPUTFILE",
+      "output_data_file_type": "CSV",
+      "output_data_file_path": "../outputfile/common_balance",
+      "node_reference": [
+        "cards_common_balance_input"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "pipeline": "cards_common_balance_standardized",
+  "config_path": "src/config/standardization/cards_common_balance_standardized.json",
+  "description": "Standardization rollup for cards common balance data grouped by product and currency.",
+  "test_cases": [
+    {
+      "id": "TC_STD_001",
+      "name": "Schema Validation",
+      "objective": "Ensure the standardized dataset exposes exactly the expected columns.",
+      "expected_columns": [
+        "product_id",
+        "txn_ccy",
+        "total_txn_amt"
+      ],
+      "category": "schema"
+    },
+    {
+      "id": "TC_STD_002",
+      "name": "Aggregation Accuracy",
+      "objective": "Verify the summed txn_amt per (product_id, txn_ccy) matches the source feed.",
+      "category": "aggregation"
+    },
+    {
+      "id": "TC_STD_003",
+      "name": "Group Uniqueness",
+      "objective": "Confirm each (product_id, txn_ccy) pair appears only once in the standardized output.",
+      "category": "data_quality"
+    },
+    {
+      "id": "TC_STD_004",
+      "name": "Row Count Alignment",
+      "objective": "Check the number of rows equals the distinct (product_id, txn_ccy) combinations from the source.",
+      "category": "consistency"
+    },
+    {
+      "id": "TC_STD_005",
+      "name": "Total Amount Conservation",
+      "objective": "Validate that the grand total of txn_amt in the output equals the grand total from the source data.",
+      "category": "aggregation"
+    },
+    {
+      "id": "TC_STD_006",
+      "name": "Null Safety",
+      "objective": "Ensure product_id, txn_ccy, and total_txn_amt contain no null values after aggregation.",
+      "category": "data_quality"
+    }
+  ]
+}

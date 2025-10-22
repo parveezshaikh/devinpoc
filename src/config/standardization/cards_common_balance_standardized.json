@@ -1,0 +1,43 @@
+{
+  "component": [
+    {
+      "id": "cards_common_balance_standardized_input",
+      "component_name": "cards_common_balance_standardized_input",
+      "component_type": "INPUTFILE",
+      "input_data_file_type": "CSV",
+      "input_data_file_path": "../outputfile/common_balance",
+      "input_schema_file_path": "",
+      "delimiter": ",",
+      "header": "true",
+      "table_name": "",
+      "database_name": ""
+    },
+    {
+      "id": "cards_common_balance_rollup",
+      "component_name": "cards_common_balance_rollup",
+      "component_type": "Rollup",
+      "rollup_type": "Rollup",
+      "rollup_groupby_keys": [
+        "product_id",
+        "txn_ccy"
+      ],
+      "rollup_aggregation": [
+        "SUM(txn_amt) as total_txn_amt"
+      ],
+      "rollup_condition": "",
+      "node_reference": [
+        "cards_common_balance_standardized_input"
+      ]
+    },
+    {
+      "id": "cards_common_balance_standardized",
+      "component_name": "cards_common_balance_standardized",
+      "component_type": "OUTPUTFILE",
+      "output_data_file_type": "CSV",
+      "output_data_file_path": "../outputfile/standardization/common_bal_prod_id",
+      "node_reference": [
+        "cards_common_balance_rollup"
+      ]
+    }
+  ]
+}

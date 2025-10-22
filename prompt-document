@@ -1,0 +1,23 @@
+A. cards_common_balance_staging pipeline
+   Prompt: Create ingestion job pipeline "cards_common_balance_staging" that ingests the new cards common balance feed (`cards_com_bal.csv`) into `outputfile/common_balance`.
+   Implementation:
+     - Added configuration file `src/config/staging/cards_common_balance_staging.json`.
+     - Pipeline tasks: read CSV via `cards_common_balance_input`, write staging output via `cards_common_balance_staging`.
+     - Execution validated with `python3 src/etl/run_pipeline.py ../config/staging/cards_common_balance_staging.json`.
+
+B. cards_common_balance_standardized pipeline
+   Prompt: Build standardization pipeline "cards_common_balance_standardized" to roll up by `product_id` and `txn_ccy`, summing `txn_amt`, and store results under `outputfile/standardization/common_bal_prod_id`.
+   Implementation:
+     - Added configuration file `src/config/standardization/cards_common_balance_standardized.json`.
+     - Pipeline tasks: read staging output, aggregate with rollup component, persist standardized results.
+     - Verified via `python3 src/etl/run_pipeline.py ../config/standardization/cards_common_balance_standardized.json`.
+
+C. cards_common_balance_standardized test automation
+   Prompt: 
+     1. Create explicit test cases for the standardization pipeline.
+     2. Implement Python automation executing those tests.
+     3. Run the automation and provide the Excel-formatted results in `result/standardization`.
+   Implementation:
+     - Authored test catalogue `src/testautomation/testcases/standardization/cards_common_balance_standardized.json` documenting six scenarios (schema, aggregation accuracy, group uniqueness, row count, total conservation, null safety).
+     - Added automation script `src/testautomation/cards_common_balance_standardized_tests.py` to execute validations, compare against source aggregates, and capture detailed results.
+     - Generated Excel summary `src/result/standardization/cards_common_balance_standardized_tests.xlsx` after rerunning the staging and standardization pipelines and executing the test suite.
