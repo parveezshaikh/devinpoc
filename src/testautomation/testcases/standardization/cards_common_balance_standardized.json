@@ -43,6 +43,131 @@
       "name": "Null Safety",
       "objective": "Ensure product_id, txn_ccy, and total_txn_amt contain no null values after aggregation.",
       "category": "data_quality"
+    },
+    {
+      "id": "TC_STD_007",
+      "name": "Boundary Condition Checks",
+      "objective": "Validate aggregated totals remain within configured numeric bounds.",
+      "category": "boundary",
+      "parameters": {
+        "min_total_txn_amt": 0,
+        "max_total_txn_amt": 50000000000
+      }
+    },
+    {
+      "id": "TC_STD_008",
+      "name": "Edge Case Coverage",
+      "objective": "Confirm groups contributing minimum and maximum transaction amounts are preserved post-standardization.",
+      "category": "edge_case"
+    },
+    {
+      "id": "TC_STD_009",
+      "name": "Happy Path Verification",
+      "objective": "Spot-check canonical product and currency combinations to ensure the pipeline produces trusted totals.",
+      "category": "functional",
+      "parameters": {
+        "sample_groups": [
+          {
+            "product_id": 450123,
+            "txn_ccy": "USD"
+          },
+          {
+            "product_id": 660789,
+            "txn_ccy": "GBP"
+          },
+          {
+            "product_id": 123450,
+            "txn_ccy": "USD"
+          }
+        ]
+      }
+    },
+    {
+      "id": "TC_STD_010",
+      "name": "Negative Scenario Guard",
+      "objective": "Detect negative or non-numeric totals that would signal upstream data quality issues.",
+      "category": "negative"
+    },
+    {
+      "id": "TC_STD_011",
+      "name": "Regression Guardrails",
+      "objective": "Compare standardized output against historical benchmarks to catch regressions early.",
+      "category": "regression",
+      "parameters": {
+        "expected_row_count": 18,
+        "row_tolerance": 0,
+        "expected_total_txn_amt": 512323909078.30444,
+        "amount_tolerance": 0.01
+      }
+    },
+    {
+      "id": "TC_STD_012",
+      "name": "Volume and Load Resilience",
+      "objective": "Ensure the pipeline handles expected volume by verifying minimum record counts.",
+      "category": "performance",
+      "parameters": {
+        "min_source_rows": 100,
+        "min_output_rows": 15
+      }
+    },
+    {
+      "id": "TC_STD_013",
+      "name": "Network Failure Resilience",
+      "objective": "Assert output artifacts are fully materialized with no truncated segments.",
+      "category": "resilience"
+    },
+    {
+      "id": "TC_STD_014",
+      "name": "Concurrency Idempotence",
+      "objective": "Verify output stability when re-aggregated to catch potential race conditions or duplicate writes.",
+      "category": "concurrency"
+    },
+    {
+      "id": "TC_STD_015",
+      "name": "Infrastructure Footprint",
+      "objective": "Verify that required data and output directories exist and are accessible.",
+      "category": "infrastructure",
+      "parameters": {
+        "required_directories": [
+          "data",
+          "outputfile",
+          "outputfile/standardization",
+          "result/standardization"
+        ]
+      }
+    },
+    {
+      "id": "TC_STD_016",
+      "name": "Privacy Controls",
+      "objective": "Ensure the standardized output does not expose sensitive personally identifiable information.",
+      "category": "privacy",
+      "parameters": {
+        "disallowed_columns": [
+          "account_number",
+          "customer_name",
+          "ssn",
+          "email_address"
+        ]
+      }
+    },
+    {
+      "id": "TC_STD_017",
+      "name": "Security Compliance",
+      "objective": "Validate identifiers match expected formatting rules to mitigate injection or tampering risks.",
+      "category": "security",
+      "parameters": {
+        "allowed_currency_pattern": "^[A-Z]{3}$",
+        "allowed_product_pattern": "^\\d+$"
+      }
+    },
+    {
+      "id": "TC_STD_018",
+      "name": "Vulnerability Scan",
+      "objective": "Surface non-finite or abnormally large totals that could signal overflow vulnerabilities or upstream corruption.",
+      "category": "vulnerability",
+      "parameters": {
+        "max_abs_total": 1000000000000
+      }
     }
   ]
 }
